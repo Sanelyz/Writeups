@@ -51,8 +51,9 @@ Megapixels                      : 4.1
                                        
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-┌──(kali㉿kali)-[~/Desktop/CTF_Events/hsctf2022/challenge4]
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/Information]
 └─$ echo 'cGljb0NURnt0aGVfbTN0YWRhdGFfMXNfbW9kaWZpZWR9' | base64 --decode 
+
 
 picoCTF{the_m3tadata_1s_modified} 
 
