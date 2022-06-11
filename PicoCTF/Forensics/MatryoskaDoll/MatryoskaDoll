@@ -1,1 +1,66 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Matryoshka doll
+ | 30 points
+
+Tags: Forensics 
+
+Author: Susie/Pandu
+
+Description
+Matryoshka dolls are a set of wooden dolls of decreasing size placed one inside another. What's the final one? Image: this
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ ls
+dolls.jpg
+                                                                           
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ binwalk dolls.jpg 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             PNG image, 594 x 1104, 8-bit/color RGBA, non-interlaced
+3226          0xC9A           TIFF image data, big-endian, offset of first image directory: 8
+272492        0x4286C         Zip archive data, at least v2.0 to extract, compressed size: 378950, uncompressed size: 383938, name: base_images/2_c.jpg
+651608        0x9F158         End of Zip archive, footer length: 22
+
+
+ZIP-Archive in the Jpg. All we have to do is to keep unzipping until something cool appears!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ unzip dolls.jpg          
+Archive:  dolls.jpg
+warning [dolls.jpg]:  272492 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+  inflating: base_images/2_c.jpg     
+                                                                           
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ unzip base_images/2_c.jpg                                          1 ⨯
+Archive:  base_images/2_c.jpg
+warning [base_images/2_c.jpg]:  187707 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+  inflating: base_images/3_c.jpg     
+                                                                           
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ unzip base_images/3_c.jpg                                          1 ⨯
+Archive:  base_images/3_c.jpg
+warning [base_images/3_c.jpg]:  123606 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+  inflating: base_images/4_c.jpg     
+                                                                           
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ unzip base_images/4_c.jpg                                          1 ⨯
+Archive:  base_images/4_c.jpg
+warning [base_images/4_c.jpg]:  79578 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+  inflating: flag.txt                
+                                                                           
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MatryoshkaDoll]
+└─$ cat flag.txt                                                       1 ⨯
+picoCTF{4f11048e83ffc7d342a15bd2309b47de}        
 
