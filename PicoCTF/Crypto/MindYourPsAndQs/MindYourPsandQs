@@ -1,0 +1,118 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Mind your Ps and Qs
+ | 20 points
+
+Tags: Crypto
+
+Author: Sara
+
+Description
+In RSA, a small e value can be problematic, but what about N? Can you decrypt this? values
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+RSA in it self is a complicated encryption system. It takes some time to understand all of it, so for further knowledgement read up on this:
+https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+
+We are also gonna write this up in python as a script for decoding.
+Dot all the values we get and the functions down in a texteditor and we'll set it up at the very end.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                                                        
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Cryptography/MindYourPsAndQs]
+└─$ ls
+values
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Cryptography/MindYourPsAndQs]
+└─$ cat values 
+Decrypt my super sick RSA:
+
+c: 861270243527190895777142537838333832920579264010533029282104230006461420086153423
+
+n: 1311097532562595991877980619849724606784164430105441327897358800116889057763413423
+
+e: 65537                                                                                                                                                             
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We get 3 values from the file given to us, we get a c, n and e value. But our main goal is to decipher the “ M ”,  M = unpadded plaintext aka our flag! 
+These are the different values:
+
+c = encrypted text
+n = public key “p and q”
+e = encryption key
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The publickey “ n value ”, consist of two values, p and q (prime1 and prime2).  The n value actually looks like this ----> ( n = p * q ) <----
+to find find the p and q value in the given n value we need to factorize it.
+
+i used factordb.com 
+
+
+So now we have the p and and q value!
+p = 1955175890537890492055221842734816092141
+q = 670577792467509699665091201633524389157003
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+RSA also uses something called the “Totient fuction” and it goes like this =
+
+totient = ( p - 1 ) * ( q - 1 )
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            
+                            (d = decryption key)
+Now lets set the d value:
+
+d = inverse(e, totient)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                                (m = padded plaintext)
+Now we need to set the m!
+
+m = pow(c, d, n)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now that we got all the functions and values going we make the script in python! It goes like this:
+
+
+
+
+#!/usr/bin/env/ python3
+
+from Crypto.Util.number import inverse
+from Crypto.Util.number import long_to_bytes
+
+c = 861270243527190895777142537838333832920579264010533029282104230006461420086153423
+
+n = 1311097532562595991877980619849724606784164430105441327897358800116889057763413423
+
+p = 1955175890537890492055221842734816092141
+
+q = 670577792467509699665091201633524389157003
+
+e = 65537
+
+totient = ( p - 1 ) * ( q - 1 )
+
+d = inverse(e, totient)
+
+m = pow(c, d, n)
+
+print(long_to_bytes(m)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+picoCTF{sma11_N_n0_g0od_13686679}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
