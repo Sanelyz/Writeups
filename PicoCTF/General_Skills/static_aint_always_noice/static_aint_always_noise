@@ -1,0 +1,73 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Static ain't always noise
+ | 20 points
+
+Tags: General Skills
+
+Author: syreal
+
+Description
+Can you look at the data in this binary: static? This BASH script might help!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fastest way to get the flag was:
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ cat static | grep -a pico
+�
+ picoCTF{d15a5m_t34s3r_6f8c8200}GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.08Tt��`�
+   
+   OR   
+                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ strings static | grep -a pico                                   
+picoCTF{d15a5m_t34s3r_6f8c8200}
+   
+   OR   
+                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ xxd static | grep -a pico -A 1 -B 1                                                        ←   ("-A 1" gives us 1 line above and “-B 1” shows 1 line below from the hexedit"
+
+00001010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00001020: 7069 636f 4354 467b 6431 3561 356d 5f74  picoCTF{d15a5m_t
+00001030: 3334 7333 725f 3666 3863 3832 3030 7d00  34s3r_6f8c8200}.                                                                                         
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using the bash script:
+                                        
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ ls
+ltdis.sh  static 
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ chmod +x ltdis.sh
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ ./ltdis.sh static
+Attempting disassembly of static ...
+Disassembly successful! Available at: static.ltdis.x86_64.txt
+Ripping strings from binary with file offsets...
+Any strings found in static have been written to static.ltdis.strings.txt with file offset
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ ls                          
+ltdis.sh  static  static.ltdis.strings.txt  static.ltdis.x86_64.txt
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/Staticaintalwaysnoise]
+└─$ cat static.ltdis.strings.txt | grep pico
+   1020 picoCTF{d15a5m_t34s3r_6f8c8200}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+picoCTF{d15a5m_t34s3r_6f8c8200}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
