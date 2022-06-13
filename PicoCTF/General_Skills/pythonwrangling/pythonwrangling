@@ -1,0 +1,52 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Python Wrangling
+ | 10 points
+
+Tags: General Skills
+
+Author: syreal
+
+Description
+Python scripts are invoked kind of like programs in the Terminal... Can you run this Python script using this password to get the flag?
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/pythonwrangling]
+└─$ ls
+ende.py  flag.txt.en  pw.txt
+
+At first glance we see 3 files given to us. A python script and 2 txt files. Let's inspect the python file!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/generalskills/pythonwrangling]
+└─$ nano ende.py
+
+
+usage_msg = "Usage: "+ sys.argv[0] +" (-e/-d) [file]"
+help_msg = usage_msg + "\n" +\
+        "Examples:\n" +\
+        "  To decrypt a file named 'pole.txt', do: " +\
+        "'$ python "+ sys.argv[0] +" -d pole.txt'\n"
+
+
+The script actually specifies what we have to do in the 2 bottom lines! (python + script +  -d  + txt.en) - let's try it!
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SaneX-picoctf@webshell:~$ python ende.py -d flag.txt.en
+
+Please enter the password: ac9bd0ffac9bd0ffac9bd0ffac9bd0ff      ← (Enter pw from the pw.txt file)
+
+picoCTF{4p0110_1n_7h3_h0us3_ac9bd0ff}
+
+SaneX-picoctf@webshell:~$
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ picoCTF{4p0110_1n_7h3_h0us3_ac9bd0ff}
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
