@@ -14,11 +14,14 @@ I wonder what this really is... enc ''.join([chr((ord(flag[i]) << 8) + ord(flag[
 
                                                                                                                                                              
 ┌──(kali㉿kali)-[~/Desktop/picoCTF/Reverseengineering/Transformation]
+
 └─$ ls
 enc
                                                                                                                                                              
 ┌──(kali㉿kali)-[~/Desktop/picoCTF/Reverseengineering/Transformation]
+
 └─$ cat enc
+
 灩捯䍔䙻ㄶ形楴獟楮獴㌴摟潦弸彤㔲挶戹㍽                                                                                                                                                             
 
 
