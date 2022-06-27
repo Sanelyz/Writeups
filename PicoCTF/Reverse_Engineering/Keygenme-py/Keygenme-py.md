@@ -18,7 +18,7 @@ keygenme-trial.py
 We start of by using the cat command on the keygenme.py file
 First thing we see is this:
 
-![image](https://user-images.githubusercontent.com/90400244/175937127-5c6169e5-1db8-4321-8f56-087eaef4a25e.png)
+![image](https://user-images.githubusercontent.com/90400244/175937549-09b86b6c-1fb6-44c7-83e0-80428fe303bf.png)
 
 
 Notice that we already get most of the flag but there is one particular bit of the flag that is encoded/hidden and it's in the “DYNAMIC” part which means it changes.
