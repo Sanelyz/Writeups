@@ -47,6 +47,7 @@ This is the result:
 
                                                                                                                                                              
 ┌──(kali㉿kali)-[~/Desktop/picoCTF/Reverseengineering/keygenme-py]
+
 └─$ python tryout.py 
 a
       
@@ -62,6 +63,7 @@ our result is:
 
                                                                                                                                                              
 ┌──(kali㉿kali)-[~/Desktop/picoCTF/Reverseengineering/keygenme-py]
+
 └─$ python tryout.py
 ac73dc29
          
@@ -84,6 +86,7 @@ Our result is:
 
                                                                                                                                                              
 ┌──(kali㉿kali)-[~/Desktop/picoCTF/Reverseengineering/keygenme-py]
+
 └─$ python tryout.py
 picoCTF{1n_7h3_|<3y_of_ac73dc29}
 
