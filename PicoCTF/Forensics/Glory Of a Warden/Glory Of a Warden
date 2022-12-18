@@ -1,0 +1,38 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Glory of the Garden
+ | 50 points
+
+Tags: 
+
+Author: jedavis/Danny
+
+Description
+This garden contains more than it seems.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Solution 1:
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/GloryOfTheWarden]
+└─$ strings garden.jpg | grep -a pico 
+Here is a flag "picoCTF{more_than_m33ts_the_3y33dd2eEF5}"
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Solution 2:
+
+Open HexEd.it and open garden.jpg, look at the bottom and voila!
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+picoCTF{more_than_m33ts_the_3y33dd2eEF5}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
