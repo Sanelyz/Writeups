@@ -1,0 +1,51 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MacroHard WeakEdge
+ | 60 points
+
+Tags: 
+
+Author: madStacks
+
+Description
+I've hidden a flag in this file. Can you find it? Forensics is fun.pptm
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MacroHardWeakEdge]
+└─$ 7z x Forensics\ is\ fun.pptm
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MacroHardWeakEdge]
+└─$ ls ppt                                                                                                                                             130 ⨯
+presentation.xml  presProps.xml  _rels  slideLayouts  slideMasters  slides  tableStyles.xml  theme  vbaProject.bin  viewProps.xml
+                                                                                                                                                             
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/MacroHardWeakEdge]
+└─$ cd ppt              
+                                                                                                                                                             
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/…/picoCTF/Forensics/MacroHardWeakEdge/ppt]
+└─$ ls
+presentation.xml  presProps.xml  _rels  slideLayouts  slideMasters  slides  tableStyles.xml  theme  vbaProject.bin  viewProps.xml
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/…/picoCTF/Forensics/MacroHardWeakEdge/ppt]
+└─$ cd slideMasters 
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/…/Forensics/MacroHardWeakEdge/ppt/slideMasters]
+└─$ ls
+hidden  _rels  slideMaster1.xml
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/…/Forensics/MacroHardWeakEdge/ppt/slideMasters]
+└─$ cat hidden 
+Z m x h Z z o g c G l j b 0 N U R n t E M W R f d V 9 r b j B 3 X 3 B w d H N f c l 9 6 M X A 1 Q   ← Base64 , convert it in CyberChef
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+flag: picoCTF{D1d_u_kn0w_ppts_r_z1p5}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
