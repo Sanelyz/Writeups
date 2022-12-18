@@ -1,0 +1,72 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Trivial Flag Transfer Protocol
+ | 90 points
+
+Tags: 
+
+Author: Danny
+
+Description
+Figure out how they moved the flag.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+So, at first look we get a pcap file which hints toward tftp-extraction. When we open wireshark and choose ‘Extract TFTP’
+we see that we get a few files:
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ ls
+instructions.txt  picture1.bmp  picture2.bmp  picture3.bmp  plan  program.deb  tftp.pcapng
+                                                                                                                            
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Trying to open the bmp files gves us an error so i checked a bit more around the "Program.deb" folder.
+Everything points us to steghide.
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ steghide extract -sf picture3.bmp                                                    “extract = extract data", ”-sf = from file "                                                              
+Enter passphrase: 
+
+Now it prompts us with a passphrase, we need a password for decryption!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Checking instruction.txt show's us some weird text:
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ cat instructions.txt 
+GSGCQBRFAGRAPELCGBHEGENSSVPFBJRZHFGQVFTHVFRBHESYNTGENAFSRE.SVTHERBHGNJNLGBUVQRGURSYNTNAQVJVYYPURPXONPXSBEGURCYNA
+
+Droodling around i find out this is ROT-13, decrypted it gives us this:
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ echo "GSGCQBRFAGRAPELCGBHEGENSSVPFBJRZHFGQVFTHVFRBHESYNTGENAFSRE.SVTHERBHGNJNLGBUVQRGURSYNTNAQVJVYYPURPXONPXSBEGURCYNA"   | rot13                   
+TFTPDOESNTENCRYPTOURTRAFFICSOWEMUSTDISGUISEOURFLAGTRANSFER.FIGUREOUTAWAYTOHIDETHEFLAGANDIWILLCHECKBACKFORTHEPLAN
+
+We check the “plan” as this hints us to:
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ cat plan            
+VHFRQGURCEBTENZNAQUVQVGJVGU-QHRQVYVTRAPR.PURPXBHGGURCUBGBF
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ echo "VHFRQGURCEBTENZNAQUVQVGJVGU-QHRQVYVTRAPR.PURPXBHGGURCUBGBF" | rot13                                        
+IUSEDTHEPROGRAMANDHIDITWITH-DUEDILIGENCE.CHECKOUTTHEPHOTOS
+
+
+“Used with 'DUEDILIGENCE' its says, lets try it"
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+┌──(kali㉿kali)-[~/Desktop/picoCTF/Forensics/TrivialFlagTransferProtocol]
+└─$ steghide extract -sf picture3.bmp
+Enter passphrase: DUEDILIGENCE
+wrote extracted data to "flag.txt".
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+picoCTF{h1dd3n_1n_pLa1n_51GHT_18375919}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
